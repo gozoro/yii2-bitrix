@@ -1,9 +1,9 @@
 <?php
 
-namespace gozoro\components\bitrix;
+namespace gozoro\bitrix;
 
 
-use gozoro\components\bitrix\CurrentBitrixUser;
+use gozoro\bitrix\CurrentBitrixUser;
 
 
 /**
@@ -13,16 +13,15 @@ use gozoro\components\bitrix\CurrentBitrixUser;
  */
 class BitrixComponent extends \yii\base\Component
 {
-
 	/**
-	 * Путь к корню сайта, где лежит папка bitrix.
+	 * The path to the root of the site where the bitrix folder is located.
 	 * @var string
 	 */
 	public $DOCUMENT_ROOT;
 
 	/**
-	 * Путь к файлу prolog_before.php отосительно DOCUMENT_ROOT.
-	 * Путь должен начинаться с /bitrix/...
+	 * The path to the file prolog_before.php relative to DOCUMENT_ROOT.
+	 * The path must start with /bitrix/...
 	 * @var string|array of string
 	 */
 	public $prolog = "/bitrix/modules/main/include/prolog_before.php";

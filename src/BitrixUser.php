@@ -1,6 +1,6 @@
 <?php
 
-namespace gozoro\components\bitrix;
+namespace gozoro\bitrix;
 
 use \CUser;
 

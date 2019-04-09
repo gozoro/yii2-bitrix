@@ -1,6 +1,6 @@
 <?php
 
-namespace gozoro\components\bitrix;
+namespace gozoro\bitrix;
 
 use \CUser;
 
@@ -9,7 +9,7 @@ use \CUser;
  * Current bitrix user
  *
  */
-class CurrentBitrixUser extends \gozoro\components\bitrix\BitrixUser
+class CurrentBitrixUser extends BitrixUser
 {
 
 	private $_cuser;

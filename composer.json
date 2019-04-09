@@ -1,0 +1,23 @@
+{
+	"name": "gozoro/yii2-bitrix",
+	"description": "Yii2 component to get data from CMS 1C Bitrix.",
+	"keywords":["yii2","bitrix", "1C"],
+	"homepage": "https://github.com/gozoro/yii2-bitrix",
+	"type": "yii2-extension",
+	"license": "MIT",
+	"authors": [
+		{
+			"name": "Gozoro",
+			"email": "gozoro@yandex.ru"
+		}
+	],
+	"require": {
+		"php": ">=5.5.9",
+		"yiisoft/yii2": "~2.0.0"
+	},
+	"autoload": {
+		"psr-4": {
+			"gozoro\\bitrix\\": "src"
+		}
+	}
+}

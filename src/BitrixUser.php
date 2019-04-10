@@ -29,7 +29,11 @@ class BitrixUser extends \yii\base\BaseObject
 	 */
 	public function __construct($row = array())
 	{
-		$this->row = $row;
+		if(is_array($row))
+		{
+			$this->row = $row;
+		}
+		$this->init();
 	}
 
 	/**

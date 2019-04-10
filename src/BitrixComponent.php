@@ -7,7 +7,9 @@ use gozoro\bitrix\CurrentBitrixUser;
 
 
 /**
- * Component to get data from CMS CMS 1C Bitrix
+ * Component to get data from CMS 1C Bitrix.
+ *
+ * Tested with CMS 1C Bitrix 17.5.4.
  *
  * @property CurrentBitrixUser $user bitrix user
  */
@@ -38,9 +40,14 @@ class BitrixComponent extends \yii\base\Component
 
 		$_SERVER["DOCUMENT_ROOT"] = $this->DOCUMENT_ROOT;
 
-		define("NO_KEEP_STATISTIC", true);
-		define("NOT_CHECK_PERMISSIONS", true);
+		if(!defined('NO_KEEP_STATISTIC'))
+			define('NO_KEEP_STATISTIC', true);
 
+		if(!defined('NOT_CHECK_PERMISSIONS'))
+			define('NOT_CHECK_PERMISSIONS', true);
+
+		$error_reporting = error_reporting();
+		$display_errors = ini_get('display_errors');
 
 		if(is_array($this->prolog))
 		{
@@ -53,6 +60,14 @@ class BitrixComponent extends \yii\base\Component
 		{
 			require($this->DOCUMENT_ROOT.$this->prolog);
 		}
+
+		// disable bitrix exception and error handlers
+		restore_exception_handler();
+		restore_error_handler();
+
+		// restore display_errors and error_reporting values
+		ini_set('display_errors', $display_errors);
+		error_reporting($error_reporting);
 	}
 
 

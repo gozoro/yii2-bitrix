@@ -3,7 +3,7 @@
 namespace gozoro\bitrix;
 
 
-use \COption;
+use \Bitrix\Main\Config\Option;
 
 /**
  * Bitrix module
@@ -11,10 +11,18 @@ use \COption;
 class BitrixModule extends \yii\base\BaseObject
 {
 	private $moduleId;
+	private $siteId;
 
-	public function __construct($moduleId)
+	/**
+	 * Bitrix module
+	 *
+	 * @param string $moduleId module ID
+	 * @param string $siteId site ID
+	 */
+	public function __construct($moduleId, $siteId="")
 	{
 		$this->moduleId = (string)$moduleId;
+		$this->siteId   = (string)$siteId;
 	}
 
 
@@ -26,7 +34,7 @@ class BitrixModule extends \yii\base\BaseObject
 	 */
 	public function setOption($key, $value)
 	{
-		return COption::SetOptionString( $this->moduleId, $key, $value );
+		return Option::set( $this->moduleId, $key, $value, $this->siteId );
 	}
 
 	/**
@@ -37,6 +45,11 @@ class BitrixModule extends \yii\base\BaseObject
 	 */
 	public function getOption($key, $defaultValue="")
 	{
-		$value = COption::GetOptionString($this->moduleId, $key, $defaultValue);
+		if($this->siteId === "")
+			$siteId = false;
+		else
+			$siteId = $this->siteId;
+
+		return Option::get($this->moduleId, $key, $defaultValue, $siteId);
 	}
 }

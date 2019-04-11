@@ -85,11 +85,12 @@ class BitrixComponent extends \yii\base\Component
 
 	/**
 	 * Returns an object to gets the values of the module options
-	 * @param string $moduleId
+	 * @param string $moduleId module ID
+	 * @param string $siteId site ID
 	 * @return \gozoro\components\bitrix\BitrixModule
 	 */
-	public function getModule($moduleId)
+	public function getModule($moduleId, $siteId="")
 	{
-		return new BitrixModule($moduleId);
+		return new BitrixModule($moduleId, $siteId);
 	}
 }

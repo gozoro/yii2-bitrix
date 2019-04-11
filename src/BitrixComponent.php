@@ -12,6 +12,7 @@ use gozoro\bitrix\CurrentBitrixUser;
  * Tested with CMS 1C Bitrix 17.5.4.
  *
  * @property CurrentBitrixUser $user bitrix user
+ * @property string $version bitrix version (for example 17.5.4)
  */
 class BitrixComponent extends \yii\base\Component
 {
@@ -92,5 +93,14 @@ class BitrixComponent extends \yii\base\Component
 	public function getModule($moduleId, $siteId="")
 	{
 		return new BitrixModule($moduleId, $siteId);
+	}
+
+	/**
+	 * Returns Bitrix version (for example 17.5.4)
+	 * @return string
+	 */
+	public function getVersion()
+	{
+		return \SM_VERSION;
 	}
 }

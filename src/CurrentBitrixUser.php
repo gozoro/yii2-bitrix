@@ -236,7 +236,7 @@ class CurrentBitrixUser extends BitrixUser
 	public function findById($userId)
 	{
 		$userId = (int)$userId;
-		return $this->findUser(array('ID'=>$userId));
+		return $this->findUser( array('ID'=>$userId) );
 	}
 
 	/**
@@ -246,7 +246,7 @@ class CurrentBitrixUser extends BitrixUser
 	 */
 	public function findByLogin($login)
 	{
-		return $this->findUser(array('LOGIN'=>$login));
+		return $this->findUser( array('LOGIN'=>$login) );
 	}
 
 	/**

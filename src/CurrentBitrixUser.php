@@ -236,14 +236,7 @@ class CurrentBitrixUser extends BitrixUser
 	public function findById($userId)
 	{
 		$userId = (int)$userId;
-		$result = CUser::GetByID($userId);
-
-		if($row = $result->Fetch())
-		{
-			return new BitrixUser($row);
-		}
-		else
-			return null;
+		return $this->findUser(array('ID'=>$userId));
 	}
 
 	/**
@@ -253,14 +246,7 @@ class CurrentBitrixUser extends BitrixUser
 	 */
 	public function findByLogin($login)
 	{
-		$result = CUser::GetByLogin($login);
-
-		if($row = $result->Fetch())
-		{
-			return new BitrixUser($row);
-		}
-		else
-			return null;
+		return $this->findUser(array('LOGIN'=>$login));
 	}
 
 	/**

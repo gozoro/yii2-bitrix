@@ -119,7 +119,10 @@ class CurrentBitrixUser extends BitrixUser
 	 */
 	public function isAuthorized()
 	{
-		return $this->_cuser->IsAuthorized();
+		if(isset($_SESSION["SESS_AUTH"]["AUTHORIZED"]))
+			return $this->_cuser->IsAuthorized();
+		else
+			return false;
 	}
 
 	/**

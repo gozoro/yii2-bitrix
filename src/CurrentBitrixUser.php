@@ -29,7 +29,7 @@ class CurrentBitrixUser extends BitrixUser
 	public function getId()
 	{
 		if($this->isAuthorized())
-			return $this->_cuser->GetID();
+			return @$this->_cuser->GetID();
 		else
 			return 0;
 	}
@@ -42,7 +42,7 @@ class CurrentBitrixUser extends BitrixUser
 	public function getLogin()
 	{
 		if($this->isAuthorized())
-			return $this->_cuser->GetLogin();
+			return @$this->_cuser->GetLogin();
 		else
 			return null;
 	}
@@ -54,7 +54,7 @@ class CurrentBitrixUser extends BitrixUser
 	public function getEmail()
 	{
 		if($this->isAuthorized())
-			return $this->_cuser->GetEmail();
+			return @$this->_cuser->GetEmail();
 		else
 			return null;
 	}
@@ -66,7 +66,7 @@ class CurrentBitrixUser extends BitrixUser
 	public function getFullName()
 	{
 		if($this->isAuthorized())
-			return $this->_cuser->GetFullName();
+			return @$this->_cuser->GetFullName();
 		else
 			return null;
 	}
@@ -78,7 +78,7 @@ class CurrentBitrixUser extends BitrixUser
 	public function getFirstName()
 	{
 		if($this->isAuthorized())
-			return $this->_cuser->GetFirstName();
+			return @$this->_cuser->GetFirstName();
 		else
 			return null;
 	}
@@ -90,7 +90,7 @@ class CurrentBitrixUser extends BitrixUser
 	public function getLastName()
 	{
 		if($this->isAuthorized())
-			return $this->_cuser->GetLastName();
+			return @$this->_cuser->GetLastName();
 		else
 			return null;
 	}
@@ -120,7 +120,7 @@ class CurrentBitrixUser extends BitrixUser
 	public function isAuthorized()
 	{
 		if(isset($_SESSION["SESS_AUTH"]["AUTHORIZED"]))
-			return $this->_cuser->IsAuthorized();
+			return @$this->_cuser->IsAuthorized();
 		else
 			return false;
 	}
@@ -131,7 +131,7 @@ class CurrentBitrixUser extends BitrixUser
 	 */
 	public function isAdmin()
 	{
-		return $this->_cuser->IsAdmin();
+		return @$this->_cuser->IsAdmin();
 	}
 
 	/**
@@ -141,7 +141,7 @@ class CurrentBitrixUser extends BitrixUser
 	public function getGroups()
 	{
 		if($this->isAuthorized())
-			return $this->_cuser->GetUserGroupArray();
+			return @$this->_cuser->GetUserGroupArray();
 		else
 			return null;
 	}
@@ -185,7 +185,7 @@ class CurrentBitrixUser extends BitrixUser
 	public function authorize($userId, $remember=false, $updateLastLogin=true)
 	{
 		$USER = new CUser;
-		return $USER->Authorize($userId, $remember, $updateLastLogin);
+		return @$USER->Authorize($userId, $remember, $updateLastLogin);
 	}
 
 
@@ -206,7 +206,7 @@ class CurrentBitrixUser extends BitrixUser
 			else
 				$bxRemember = 'N';
 
-			return $USER->Login($login, $password, $bxRemember);
+			return @$USER->Login($login, $password, $bxRemember);
 		}
 		else
 			return true;
@@ -221,7 +221,7 @@ class CurrentBitrixUser extends BitrixUser
 	{
 		if($this->isAuthorized())
 		{
-			$this->_cuser->Logout();
+			@$this->_cuser->Logout();
 		}
 		else
 			return true;
@@ -259,9 +259,9 @@ class CurrentBitrixUser extends BitrixUser
 			$by = 'id';
 			$order = 'asc';
 			$filter = $where;
-			$result = CUser::GetList($by, $order, $filter, array('SELECT'=>array('*','UF_*')));
+			$result = @CUser::GetList($by, $order, $filter, array('SELECT'=>array('*','UF_*')));
 
-			if($row = $result->Fetch())
+			if($row = @$result->Fetch())
 			{
 				return new BitrixUser($row);
 			}
@@ -280,10 +280,10 @@ class CurrentBitrixUser extends BitrixUser
 		$order = 'asc';
 		$filter = $where;
 
-		$result = CUser::GetList($by, $order, $filter, array('SELECT'=>array('*','UF_*')));
+		$result = @CUser::GetList($by, $order, $filter, array('SELECT'=>array('*','UF_*')));
 
 		$users = array();
-		while($row = $result->Fetch())
+		while($row = @$result->Fetch())
 		{
 			$users[ $row['ID'] ] = new BitrixUser($row);
 		}

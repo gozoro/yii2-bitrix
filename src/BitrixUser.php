@@ -212,7 +212,7 @@ class BitrixUser extends \yii\base\BaseObject
 	 */
 	public function getGroups()
 	{
-		return CUser::GetUserGroup($this->getId());
+		return @CUser::GetUserGroup($this->getId());
 	}
 
 	/**
@@ -238,7 +238,7 @@ class BitrixUser extends \yii\base\BaseObject
 	public function update($newfields=array())
 	{
 		$USER = new CUser;
-		$result = $user->Update($this->getId(), $newfields);
+		$result = @$user->Update($this->getId(), $newfields);
 		$err = $user->LAST_ERROR;
 
 		if($err)

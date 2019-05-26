@@ -249,5 +249,21 @@ class BitrixUser extends \yii\base\BaseObject
 
 		return (bool)$result;
 	}
+
+
+	/**
+	 * Validate user password
+	 * @param string $password user password
+	 * @return bool
+	 */
+	public function validatePassword($password)
+	{
+		$passhash     = $this->getParam('PASSWORD');
+		$salt         = substr($passhash, 0, (strlen($passhash) - 32));
+		$realpasshash = substr($passhash, -32);
+		$password     = md5($salt.$password);
+		return ($password == $realpasshash);
+	}
+
 }
 

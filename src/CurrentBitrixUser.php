@@ -190,6 +190,21 @@ class CurrentBitrixUser extends BitrixUser
 
 
 	/**
+	 * Validate user password
+	 * @param string $password user password
+	 * @param string $login user login
+	 * @return bool
+	 */
+	public function validatePassword($password, $login = null)
+	{
+		if(is_null($login))
+			$login = $this->getLogin();
+
+		return $this->findByLogin($login)->validatePassword($password);
+	}
+
+
+	/**
 	 * User login to CMS 1C Bitrix
 	 * @param string $login
 	 * @param string $password
@@ -206,7 +221,8 @@ class CurrentBitrixUser extends BitrixUser
 			else
 				$bxRemember = 'N';
 
-			return @$USER->Login($login, $password, $bxRemember);
+			@$USER->Login($login, $password, $bxRemember);
+			return @$USER->IsAuthorized();
 		}
 		else
 			return true;
